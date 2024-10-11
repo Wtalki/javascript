@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech to Text in Myanmar</title>
+</head>
+<body>
+
+    <h1>Speech to Text (Myanmar)</h1>
+    <button id="start-btn">Start Listening</button>
+    <p id="result"></p>
+
+    <script>
+        // Check if the Web Speech API is supported
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+        if (SpeechRecognition) {
+            const recognition = new SpeechRecognition();
+
+            // Set recognition language to Burmese (my-MM)
+            recognition.lang = 'my-MM';  // Language code for Myanmar (Burmese)
+
+            recognition.onstart = () => {
+                console.log('Speech recognition started. Speak into the microphone.');
+            };
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById('result').innerText = transcript;
+            };
+
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error', event.error);
+            };
+
+            recognition.onend = () => {
+                console.log('Speech recognition ended.');
+            };
+
+            // Start recognition on button click
+            document.getElementById('start-btn').addEventListener('click', () => {
+                recognition.start();
+            });
+
+        } else {
+            console.log('Web Speech API not supported in this browser.');
+            alert('Your browser does not support the Web Speech API.');
+        }
+    </script>
+
+</body>
+</html>
