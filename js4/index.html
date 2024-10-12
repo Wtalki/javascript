@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Sort element by numerical value of data attribute using JavaScript</h2>
+    <p>Set the data percentage property and the content of each child:</p>
+    <input type = "number" id = "inp1" placeholder = "Data Percentage"> <br><br>
+    <p id = "prev">The initial order of paragraph elements in the container element is:</p>
+    <div id = "container"> </div>
+    <button id = "add" onclick = "appendElement()">Append element to the parent element</button>
+    <button id = "btn" onclick = "sortParent()">click to sort</button>
+    <button id = "btn" onclick = "desc()">click to sort</button>
+    <p id = "result"> </p>
+</body>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    var result = $('#result');
+    var prev = $("#prev");
+    var container = $("#container");
+
+    function appendElement(){
+        var inp1 = $("#inp1");
+        var val1 = inp1.val();
+        var num =Number(val1);
+        var paras = $(" <p> </p> ").text(num);
+
+        paras.addClass("childPara");
+        paras.attr("data-percentage", num);
+        paras.appendTo(container);
+        inp1.val("");
+    }
+    function sortParent(){
+        function cmp(x,y){
+            return x.getAttribute("data-percentage") - y.getAttribute("data-percentage");
+        }
+        var childElements = container.find(".childPara");
+        var sortedChildElement = childElements.sort(cmp).appendTo(container);
+        prev.html(" <b> The final sorted order of the child elements of the container element is: </b> ");
+        result.html(" The elements are sorted finally. ");
+        
+        console.log(sortedChildElement)
+    }
+    function desc(){
+        function cmp(x,y){
+            return x.getAttribute("data-percentage") - y.getAttribute("data-percentage");
+        }
+        var childElements = container.find(".childPara");
+        var sortedChildElement = childElements.sort(cmp).appendTo(container);
+        prev.html(" <b> The final sorted order of the child elements of the container element is: </b> ");
+        result.html(" The elements are sorted finally. ");
+        console.log(sortedChildElement)
+    }
+
+</script>
+</html>

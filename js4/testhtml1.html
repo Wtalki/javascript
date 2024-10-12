@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>sort an array on multiple columns using javascript</h2>
+    <p>enter your name and age to insert into array</p>
+
+    <input type="text" name="" placeholder="name" id="inp1">
+    <input type="number" name="" placeholder="age" id="inp2">
+
+    <button id="add" onclick="insertArr()">Add item to array</button>
+    <button id="btn" onclick="sortArr()">click to sort</button>
+
+    <p id="prev">the initial order of values in array f arrays is:</p>
+    <p id="result">the final sorted order of values in array of arrays if:</p>
+</body>
+<script>
+    var result = document.getElementById("result");
+    var prev = document.getElementById("prev");
+    var myArr = [];
+
+    function insertArr(){
+        var inp1 = document.getElementById("inp1");
+        var val1 = inp1.value;
+        var name = val1;
+
+        var inp2 = document.getElementById("inp2")
+        var val2 = inp2.value;
+        var age = Number(val2);
+
+        var arr = [name,age];
+        myArr.push(arr);
+        console.log(myArr)
+
+        inp1.value = "";
+        inp2.value = "";
+    }
+
+    function sortArr(){
+        for (var item of myArr){
+            prev.innerHTML += "<b> [" + item + "] </b>";
+        }
+
+        function cmp(a,b){
+            var xa = a[1];
+            var xb = b[1];
+
+            if(xa < xb)
+                return -1;
+            if(xa < xb)
+                return 1;
+            return 0;
+        }
+        myArr.sort(cmp);
+
+         // Display the sorted order of values
+         for (var item of myArr) {
+            result.innerHTML += " <b> [ " + item + " ] </b> ";
+         }
+    }
+</script>
+</html>
